@@ -39,6 +39,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_DB_ROOT_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_DB_ROOT_PASS}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
     ports:
       - $MONGO_DB_LOCAL_PORT:27017
     volumes:

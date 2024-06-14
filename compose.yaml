@@ -21,6 +21,7 @@ services:
       MYSQL_USER: ${MYSQL_DB_USER}
       MYSQL_PASSWORD: ${MYSQL_DB_PASS}
       MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
     ports:
       - $MYSQL_DB_LOCAL_PORT:3306
     volumes:

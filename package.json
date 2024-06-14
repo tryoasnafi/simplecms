@@ -17,7 +17,16 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prisma": "prisma",
+    "prisma:generate:mysql_client": "prisma generate --schema prisma/mysql/schema.prisma",
+    "prisma:generate:mongo_client": "prisma generate --schema prisma/mongo/schema.prisma",
+    "prisma:generate:db_clients": "prisma generate --schema prisma/mysql/schema.prisma && prisma generate --schema prisma/mongo/schema.prisma",
+    "mysql:migrate:dev": "prisma migrate dev --schema prisma/mysql/schema.prisma --name ",
+    "mysql:migrate:dev:create": "prisma migrate dev --schema prisma/mysql/schema.prisma --create-only",
+    "mysql:migrate:deploy": "npx prisma migrate deploy --schema prisma/mysql/schema.prisma --preview-feature",
+    "mysql:dbpush": "npx prisma db push --schema prisma/mysql/schema.prisma",
+    "mongo:dbpush": "npx prisma db push --schema prisma/mongo/schema.prisma"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

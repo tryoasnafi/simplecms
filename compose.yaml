@@ -1,19 +1,6 @@
 # This compose file is used for local development only
 # It is not used in production
 services:
-  api:
-    build: .
-    command: sh -c "yarn && yarn mysql:migrate:dev && yarn start:dev"
-    ports:
-      - '${API_PORT}:${API_PORT}'
-    volumes:
-      - .:/app
-    env_file:
-      - .env
-    depends_on:
-      mysqldb:
-        condition: service_healthy
-
   mysqldb:
     image: mysql:8.0
     restart: unless-stopped
@@ -24,6 +11,8 @@ services:
       MYSQL_DATABASE: ${MYSQL_DB_NAME}
     ports:
       - $MYSQL_DB_LOCAL_PORT:3306
+    networks:
+      - app_network
     volumes:
       - mysql-db-data:/var/lib/mysql
     healthcheck:
@@ -42,6 +31,8 @@ services:
       MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
     ports:
       - $MONGO_DB_LOCAL_PORT:27017
+    networks:
+      - app_network
     volumes:
       - mongo-db-data:/data/db
     healthcheck:
@@ -50,6 +41,27 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
+
+  api:
+    build: .
+    command: sh -c "yarn && yarn prisma:generate && yarn migrate:dev && yarn start:dev"
+    ports:
+      - '${API_PORT}:${API_PORT}'
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    networks:
+      - app_network
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+
+networks:
+  app_network:
+    driver: bridge
 
 volumes:
   mysql-db-data: {}

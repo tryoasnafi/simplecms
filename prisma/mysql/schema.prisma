@@ -14,9 +14,17 @@ datasource db {
   url      = env("MYSQL_DB_CONN_STRING")
 }
 
+enum enumRoles {
+  admin
+  writer
+}
+
 model users {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  name     String
-  password String @db.VarChar(255)
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
+  name       String
+  password   String    @db.VarChar(255)
+  role       enumRoles @default(writer)
+  created_at DateTime  @default(dbgenerated("CURRENT_TIMESTAMP")) @db.Timestamp()
+  updated_at DateTime  @updatedAt @db.Timestamp()
 }

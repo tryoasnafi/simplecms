@@ -3,7 +3,7 @@
 services:
   api:
     build: .
-    command: sh -c "yarn && yarn prisma:generate:db_clients && yarn start:dev"
+    command: sh -c "yarn && yarn mysql:migrate:dev && yarn start:dev"
     ports:
       - '${API_PORT}:${API_PORT}'
     volumes:
@@ -18,10 +18,10 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_DB_PASS}'
       MYSQL_USER: ${MYSQL_DB_USER}
-      MYSQL_PASSWORD: ${MYSQL_DB_PASS}
+      MYSQL_PASSWORD: '${MYSQL_DB_PASS}'
       MYSQL_DATABASE: ${MYSQL_DB_NAME}
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
     ports:
       - $MYSQL_DB_LOCAL_PORT:3306
     volumes:

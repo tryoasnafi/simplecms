@@ -22,7 +22,7 @@
     "prisma:generate:mysql_client": "prisma generate --schema prisma/mysql/schema.prisma",
     "prisma:generate:mongo_client": "prisma generate --schema prisma/mongo/schema.prisma",
     "prisma:generate:db_clients": "prisma generate --schema prisma/mysql/schema.prisma && prisma generate --schema prisma/mongo/schema.prisma",
-    "mysql:migrate:dev": "prisma migrate dev --schema prisma/mysql/schema.prisma --name ",
+    "mysql:migrate:dev": "prisma migrate dev --schema prisma/mysql/schema.prisma --name init",
     "mysql:migrate:dev:create": "prisma migrate dev --schema prisma/mysql/schema.prisma --create-only",
     "mysql:migrate:deploy": "npx prisma migrate deploy --schema prisma/mysql/schema.prisma --preview-feature",
     "mysql:dbpush": "npx prisma db push --schema prisma/mysql/schema.prisma",

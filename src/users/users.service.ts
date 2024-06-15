@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -15,11 +16,12 @@ export class UsersService {
     if (user) {
       throw ErrEmailAlreadyExists;
     }
+    const hash = await this.hashPassword(createUserDto.password);
     return this.db.users.create({
       data: {
         email: createUserDto.email,
         name: createUserDto.name,
-        password: createUserDto.password,
+        password: hash,
         role: createUserDto.role,
       },
     });
@@ -73,5 +75,14 @@ export class UsersService {
     } catch (error) {
       throw ErrUserNotFound;
     }
+  }
+
+  async hashPassword(password: string) {
+    const salt = await bcrypt.genSalt();
+    return bcrypt.hash(password, salt);
+  }
+
+  verifyPassword(hashedPassword: string, password: string) {
+    return bcrypt.compare(password, hashedPassword);
   }
 }

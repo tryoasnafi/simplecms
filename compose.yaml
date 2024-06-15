@@ -44,7 +44,7 @@ services:
 
   api:
     build: .
-    command: sh -c "yarn && yarn start:dev"
+    command: sh -c "yarn && yarn prisma:generate && yarn start:dev"
     ports:
       - '${API_PORT}:${API_PORT}'
     volumes:

@@ -62,3 +62,16 @@ Please use `compose.yaml` for development.
 ```bash
 $ docker-compose -f compose.yaml up -d
 ```
+
+## Setup database
+We need to execute project command inside the container
+
+```sh
+$ docker exec -it simplecms-api-1 sh
+
+# generate prisma client
+$ yarn prisma:generate
+
+# run migration
+$ yarn dbpush
+```

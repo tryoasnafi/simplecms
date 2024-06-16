@@ -72,3 +72,12 @@ $ docker exec -it simplecms-api-1 yarn dbpush
 ```sh
 $ docker exec -it simplecms-api-1 yarn prisma:seed
 ```
+
+## UI
+Setting env
+```sh
+$ cp -p .env.example .env
+```
+
+Open the UI on port `3000`
+> If it's not running from the compose, open folder `ui` and run `npm run dev` or `yarn dev`

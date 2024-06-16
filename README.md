@@ -67,3 +67,8 @@ $ docker-compose -f compose.yaml up -d
 ```sh
 $ docker exec -it simplecms-api-1 yarn dbpush
 ```
+
+## Run Seeder
+```sh
+$ docker exec -it simplecms-api-1 yarn prisma:seed
+```

@@ -22,7 +22,8 @@
     "migrate:dev": "npx prisma migrate dev --schema prisma/schema.prisma --name init",
     "migrate:dev:create": "npx prisma migrate dev --schema prisma/schema.prisma --create-only",
     "migrate:deploy": "npx prisma migrate deploy --schema prisma/schema.prisma --preview-feature",
-    "dbpush": "npx prisma db push --schema prisma/schema.prisma"
+    "dbpush": "npx prisma db push --schema prisma/schema.prisma",
+    "prisma:seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

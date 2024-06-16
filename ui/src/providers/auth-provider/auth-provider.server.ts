@@ -1,10 +1,10 @@
-import type { AuthProvider } from "@refinedev/core";
-import { cookies } from "next/headers";
+import type { AuthProvider } from '@refinedev/core';
+import { cookies } from 'next/headers';
 
-export const authProviderServer: Pick<AuthProvider, "check"> = {
+export const authProviderServer: Pick<AuthProvider, 'check'> = {
   check: async () => {
     const cookieStore = cookies();
-    const auth = cookieStore.get("auth");
+    const auth = cookieStore.get('auth');
 
     if (auth) {
       return {
@@ -15,7 +15,7 @@ export const authProviderServer: Pick<AuthProvider, "check"> = {
     return {
       authenticated: false,
       logout: true,
-      redirectTo: "/login",
+      redirectTo: '/login',
     };
   },
 };

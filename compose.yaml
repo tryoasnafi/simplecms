@@ -58,6 +58,20 @@ services:
         condition: service_healthy
       mongodb:
         condition: service_healthy
+  web:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app/ui
+    env_file:
+      - ./ui/.env
+    networks:
+      - app_network
+    depends_on:
+      - api
 
 networks:
   app_network:

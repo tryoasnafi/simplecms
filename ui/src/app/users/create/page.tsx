@@ -1,21 +1,17 @@
-"use client";
+'use client';
 
-import { Create, useForm, useSelect } from "@refinedev/antd";
-import { Form, Input, Select } from "antd";
+import { Create, useForm } from '@refinedev/antd';
+import { Form, Input, Select } from 'antd';
 
 export default function BlogPostCreate() {
   const { formProps, saveButtonProps } = useForm({});
-
-  const { selectProps: categorySelectProps } = useSelect({
-    resource: "categories",
-  });
 
   return (
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label={"Title"}
-          name={["title"]}
+          label={'Name'}
+          name={['name']}
           rules={[
             {
               required: true,
@@ -25,31 +21,30 @@ export default function BlogPostCreate() {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"Content"}
-          name="content"
+          label={'E-Mail'}
+          name={['email']}
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Input.TextArea rows={5} />
+          <Input type="email" />
         </Form.Item>
         <Form.Item
-          label={"Category"}
-          name={["category", "id"]}
+          label={'Password'}
+          name={['password']}
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Select {...categorySelectProps} />
+          <Input type="password" />
         </Form.Item>
         <Form.Item
-          label={"Status"}
-          name={["status"]}
-          initialValue={"draft"}
+          label={'Role'}
+          name={['role']}
           rules={[
             {
               required: true,
@@ -57,13 +52,18 @@ export default function BlogPostCreate() {
           ]}
         >
           <Select
-            defaultValue={"draft"}
+            placeholder="Select Role"
+            style={{ width: 300 }}
             options={[
-              { value: "draft", label: "Draft" },
-              { value: "published", label: "Published" },
-              { value: "rejected", label: "Rejected" },
+              {
+                value: 'writer',
+                label: 'Writer',
+              },
+              {
+                value: 'admin',
+                label: 'Administrator',
+              },
             ]}
-            style={{ width: 120 }}
           />
         </Form.Item>
       </Form>

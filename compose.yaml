@@ -61,7 +61,6 @@ services:
   web:
     build:
       context: ./ui
-      dockerfile: Dockerfile
     ports:
       - '3000:3000'
     volumes:

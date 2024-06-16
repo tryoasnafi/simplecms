@@ -19,7 +19,25 @@ COPY --from=deps /app/refine/node_modules ./node_modules
 
 COPY . .
 
+RUN yarn build
+
+FROM base AS runner
+
+ENV NODE_ENV production
+
+COPY --from=builder /app/refine/public ./public
+
+RUN mkdir .next
+RUN chown refine:nodejs .next
+
+COPY --from=builder --chown=refine:nodejs /app/refine/.next/standalone ./
+COPY --from=builder --chown=refine:nodejs /app/refine/.next/static ./.next/static
+
+USER refine
+
+EXPOSE 3000
+
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["yarn", "dev"]
+CMD ["node", "server.js"]

@@ -41,7 +41,11 @@ export class UsersService {
   }
 
   async findByEmail(email: string) {
-    return this.db.users.findFirst({ where: { email } });
+    try {
+      return await this.db.users.findFirst({ where: { email } });
+    } catch (error) {
+      throw ErrUserNotFound;
+    }
   }
 
   async findById(id: number) {

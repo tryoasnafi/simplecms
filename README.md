@@ -87,6 +87,7 @@ Setting env
 $ cd ui
 $ cp -p .env.example .env
 ```
+> If compose run properly, edit API_URL from http://localhost:3001 to http://api:3001 
 
 Open the UI on port `3000`
 > If it's not running from the compose, open folder `ui` and run `npm run dev` or `yarn dev`

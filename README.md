@@ -60,7 +60,7 @@ $ yarn run test:cov
 Please use `compose.yaml` for development.
   
 ```bash
-$ docker-compose -f compose.yaml up -d
+$ docker compose -f compose.yaml up -d
 ```
 
 ## Run Migration
@@ -76,6 +76,7 @@ $ docker exec -it simplecms-api-1 yarn prisma:seed
 ## UI
 Setting env
 ```sh
+$ cd ui
 $ cp -p .env.example .env
 ```
 

@@ -72,6 +72,14 @@ $ docker exec -it simplecms-api-1 yarn dbpush
 ```sh
 $ docker exec -it simplecms-api-1 yarn prisma:seed
 ```
+After seeding, you can use demo user:
+```
+admin@simplecms.com
+admin123
+
+writer@simplecms.com
+writer123
+```
 
 ## UI
 Setting env
